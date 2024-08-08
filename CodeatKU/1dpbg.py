@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 #Declare the parameters
-num_bands = 2
+num_bands = 4
 
 resolution = 10
 eps1 = 13
@@ -19,9 +19,9 @@ b = 2.0 # thickness of the slab2
 a1 = a #periodicity in the y direction
 # define the geometry
 geometry_lattice = mp.Lattice(size=mp.Vector3(1,1),
-                              basis1=mp.Vector3(a1,0),
-                              basis2=mp.Vector3(0, -2*m.pi),
-                              basis3 = mp.Vector3(0,0, 2*m.pi))
+                              basis1=mp.Vector3(a1,0))
+                            #   basis2=mp.Vector3(0, -2*m.pi),
+                            #   basis3 = mp.Vector3(0,0, 2*m.pi))
 # basis2 is set to infinite to make the simulation periodic and work 
 # #if we replace it with mp.Vector3(0,0) we get error saying division by zero, to wliminate this error we set it to infinite
 k_points = [
@@ -38,6 +38,11 @@ k_points = [
     mp.Vector3(0,-1*m.pi/a1,0), # x point
     mp.Vector3() , # M point
     mp.Vector3(0,m.pi/a1,0), # x point
+
+    # these k points assumd as unitcell's k vectors in x- direction
+    # mp.Vector3(0,0), #O point
+    # mp.Vector3(m.pi/a1), #M point
+    # mp.Vector3(2*m.pi/a1), #L point
 ]
 k_points = mp.interpolate(1, k_points)
 geometry1 = [
